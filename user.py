@@ -37,6 +37,6 @@ def get_users():
     with open('users.csv', 'r', newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            users.append({"name": row[0], "checked": False}) #, "debt": row[1]})
+            users.append({"name": row[0], "checked": False, "debt": row[1]})
 
     return users

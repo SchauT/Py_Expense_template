@@ -39,13 +39,10 @@ def new_expense(*args):
 
     infos = prompt(expense_questions)
 
-    print(infos)
-
     for user in users:
         if user['name'] == infos['spender']:
             user['checked'] = True
 
-    print(users)
 
     sharing_infos = prompt(expense_questions_shared)
 
@@ -55,12 +52,12 @@ def new_expense(*args):
         writer = csv.writer(f)
         writer.writerows([infos_list + sharing_infos_list])
 
-    # with open('users.csv', 'w', newline='') as f:
-    #     writer = csv.writer(f)
-    #     for user in users:
-    #         if sharing_infos_list.contains(user['name']):
-    #             user['debt'] = int(user['debt']) + int(infos['amount']) / len(sharing_infos_list)
-    #         writer.writerows([[user['name'], user['debt']]])
+    with open('users.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        for user in users:
+            if sharing_infos_list.contains(user['name']):
+                user['debt'] = int(user['debt']) + int(infos['amount']) / len(sharing_infos_list)
+            writer.writerows([[user['name'], user['debt']]])
 
     print("Expense Added !")
     return True
