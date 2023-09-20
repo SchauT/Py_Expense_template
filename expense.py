@@ -19,7 +19,7 @@ expense_questions = [
         "type":"list",
         "name":"spender",
         "message":"New Expense - Spender: ",
-        "choices": users
+        "choices": get_users()
     },
 
 ]
@@ -29,13 +29,11 @@ expense_questions_shared = [
         "type":"checkbox",
         "name":"shared",
         "message":"New Expense - Shared: ",
-        "choices": users
+        "choices": get_users()
     },
 ]
 
 def new_expense(*args):
-    users = get_users()
-    print(users)
 
     infos = prompt(expense_questions)
 
@@ -51,13 +49,13 @@ def new_expense(*args):
     with open('expense_report.csv', 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerows([infos_list + sharing_infos_list])
-
-    with open('users.csv', 'w', newline='') as f:
-        writer = csv.writer(f)
-        for user in users:
-            if sharing_infos_list.contains(user['name']):
-                user['debt'] = int(user['debt']) + int(infos['amount']) / len(sharing_infos_list)
-            writer.writerows([[user['name'], user['debt']]])
+    #
+    # with open('users.csv', 'w', newline='') as f:
+    #     writer = csv.writer(f)
+    #     for user in users:
+    #         if sharing_infos_list.contains(user['name']):
+    #             user['debt'] = int(user['debt']) + int(infos['amount']) / len(sharing_infos_list)
+    #         writer.writerows([[user['name'], user['debt']]])
 
     print("Expense Added !")
     return True
